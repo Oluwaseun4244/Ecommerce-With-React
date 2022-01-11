@@ -14,7 +14,7 @@ function Product({
     <div className="card mb-4">
       <div className="card-body">
         <div className="single-item row">
-        <div className="col-4">
+        <div className="col-4 product-img-div">
             <Link to={`/product/${prod_id}`}>
               <img
                 src={`http://localhost:8000/${pic}`}

@@ -1404,9 +1404,14 @@
   margin-inline: 36%;
 }
 
+.product-img-div{
+  width: 260px;
+}
+
 .card-img-top {
-  width: 90%;
+  width: 100%;
   height: 210.56px;
+  object-fit: contain;
 }
 
 /* .cart-num{
