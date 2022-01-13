@@ -56,7 +56,7 @@ function Product({
                 className="fa fa-cart-plus item-actions"
                 onClick={func}
               />
-              <i className="fa fa-heart item-actions" />
+              <i style={{color: "red"}} className="fa fa-heart item-actions" />
               <i className="fa fa-search-plus item-actions" />
             </div>
           </div>

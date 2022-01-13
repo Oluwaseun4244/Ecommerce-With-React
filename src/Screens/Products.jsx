@@ -24,7 +24,7 @@ const notify = (message) => {
 const notify2 = () => {
   toast.warn("Product already in cart", {
     position: toast.POSITION.TOP_CENTER,
-    autoClose: 2000,
+    autoClose: 1500,
     toastId: "01",
     transition: Zoom,
   });
@@ -32,20 +32,20 @@ const notify2 = () => {
 
 function Products() {
   const { items, addItem, isEmpty } = useCart();
-  const [pageT, setPageType] = useState("list");
+  const [pageType, setPageType] = useState(true);
   const [products, setProducts] = useState([]);
 
-  const togrid = () => {
-    localStorage.setItem("pageType", "grid");
-    setPageType("grid");
-  };
+  // const togrid = () => {
+  //   localStorage.setItem("pageType", "grid");
+  //   setPageType("grid");
+  // };
 
-  const tolist = () => {
-    localStorage.setItem("pageType", "list");
-    setPageType("list");
-  };
+  // const tolist = () => {
+  //   localStorage.setItem("pageType", "list");
+  //   setPageType("list");
+  // };
 
-  let pageType = localStorage.getItem("pageType");
+  // let pageType = localStorage.getItem("pageType");
 
   const getProducts = () => {
     fetch("http://localhost:8000/api/products")
@@ -71,17 +71,23 @@ function Products() {
 
   const leftbarFilter = (ev) => {
     if (ev.target.checked) {
-      // console.log("filtered", ev.target.value);
-      fetch(`http://localhost:8000/api/filter/${ev.target.value}`)
-        .then((response) => response.json())
-        .then((filtered) => {
-          setProducts(filtered);
-        })
-        .catch();
-    } else {
-      getProducts();
-    }
-  };
+      products.filter((product, i)=>{
+        return (
+         setProducts( product.category === ev.target.value)
+        )
+      })
+
+    //   console.log("filtered", ev.target.value);
+    //   fetch(`http://localhost:8000/api/filter/${ev.target.value}`)
+    //     .then((response) => response.json())
+    //     .then((filtered) => {
+    //       setProducts(filtered);
+    //     })
+    //     .catch();
+    // } else {
+    //   getProducts();
+    // }
+  }};
 
   const checkAndNotify = (product, id) => {
 
@@ -90,7 +96,7 @@ function Products() {
       const checkItem = (item)=>{
         return item.id === id
       }
-    //inCart maps over items, call checkItem() and provides each item as argument for checkItem
+    //findIndex maps over items, call checkItem() and provides each item as argument for checkItem
       const inCart = items.findIndex(checkItem)
     //if result condition isn't met, result is -1 and hence below
       if (inCart > -1){
@@ -103,6 +109,7 @@ function Products() {
   };
 
   useEffect(() => {
+    // localStorage.setItem("pageType", "list");
     getProducts();
   }, []);
 
@@ -115,15 +122,15 @@ function Products() {
       <div className="container">
         <div className="section-4">
           <Filter
-            grid={togrid}
-            list={tolist}
+                 grid={()=>setPageType(false)}
+                 list={()=>setPageType(true)}
             func={(e) => perPage(e.target.value)}
           />
         </div>
         <div className="main">
           <div className="row">
             <Leftbar inputFunc={leftbarFilter} />
-            {pageType === "list" ? (
+            {pageType ? (
               <div className="col-lg-9 list-card">
                 {products.map((product, i) => {
                   return (
@@ -140,7 +147,7 @@ function Products() {
                   );
                 })}
               </div>
-            ) : pageType === "grid" ? (
+            ) : (
               <div className="col-lg-9">
                 <div className="row">
                   {products.map((product, i) => {
@@ -149,7 +156,7 @@ function Products() {
                         key={i}
                         pic={product.product_image1}
                         productName={product.product_name}
-                        productPrice={product.product_price}
+                        price={product.price}
                         oldPrice={product.product_old_price}
                         description={product.product_description}
                         prod_id={product.id}
@@ -159,9 +166,7 @@ function Products() {
                   })}
                 </div>
               </div>
-            ) : (
-              ""
-            )}
+            ) }
           </div>
         </div>
         <div className="supporter">

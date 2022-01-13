@@ -11,7 +11,7 @@ import { ToastContainer, Zoom, toast } from "react-toastify";
 toast.configure();
 
 
-const FillContact = (message) => {
+const warning = (message) => {
   toast.warn(message, {
     position: toast.POSITION.TOP_CENTER,
     autoClose: 2500,
@@ -32,8 +32,7 @@ const notify = (message) => {
 
 function ShippingInfo() {
   let user = JSON.parse(localStorage.getItem("user"));
-  const [errorMsg, setErrorMsg] = useState();
-  let user_contact = JSON.parse(localStorage.getItem("user_contact"));
+  // const [errorMsg, setErrorMsg] = useState();
   const [contactUser, setContactUser] = useState(false);
 
   const { items } = useCart();
@@ -50,9 +49,7 @@ function ShippingInfo() {
     postal_code: "",
   });
 
-  // const FillContact = () => {
-  //   alert("kindly fill contact form and save");
-  // };
+
 
   const handleChange = (e) => {
     setContact({ ...contact, [e.target.id]: e.target.value });
@@ -91,15 +88,8 @@ function ShippingInfo() {
 
   const contactUpdate = () => {
     const payload2 = {
-      user_id: `${user.id}`,
-      email_or_phone: `${contact.email_or_phone}`,
-      first_name: `${contact.first_name}`,
-      last_name: `${contact.last_name}`,
-      address: `${contact.address}`,
-      apartment_address: `${contact.apartment_address}`,
-      city: `${contact.city}`,
-      country: `${contact.country}`,
-      postal_code: `${contact.postal_code}`,
+      ...contact
+
     };
 
     var myHeaders = new Headers();
@@ -115,8 +105,13 @@ function ShippingInfo() {
     fetch("http://127.0.0.1:8000/api/update_contact", requestOptions2)
       .then((response) => response.json())
       .then((result) => {
-        notify("Contact info has been updated")
-        // console.log("e don update oo", result);
+        if (result === 1){
+
+          notify("Contact info has been updated")
+        } else {
+          warning("Ensure all fields are filled")
+          console.log(result)
+        }
       })
       .catch((error) => console.log("error", error));
   };
@@ -128,15 +123,13 @@ function ShippingInfo() {
         if (user_contact.length > 0) {
           setContactUser(true);
           setContact(user_contact[0]);
-          console.log("ohun re", user_contact[0]);
-          localStorage.setItem("user_contact", JSON.stringify(user_contact[0]));
+
         } else {
           console.log("contact not found for logged in user");
         }
       });
   };
 
-  // let user_cont = JSON.parse(localStorage.getItem("user_contact"));
 
   useEffect(() => {
     getContact();
@@ -154,7 +147,7 @@ function ShippingInfo() {
             <p className="demo-Ptxt">Cart/ Information/ Shipping/ Payment</p>
 
             <div className="info-div">
-              <p style={{ textAlign: "center", color: "red" }}>{errorMsg}</p>
+              {/* <p style={{ textAlign: "center", color: "red" }}>{errorMsg}</p> */}
               <h5 className="contact-info">Contact Information</h5>
 
               <div>
@@ -199,7 +192,7 @@ function ShippingInfo() {
                     />
                   </div>
                 </div>
-
+            {/* <p style={{color:"red"}}>{error.address}</p> */}
                 <input
                   id="address"
                   required
@@ -282,8 +275,8 @@ function ShippingInfo() {
             {contactUser ? (
               <CartTotals pageprop={true} />
             ) : (
-              <div onClick={()=>FillContact("kindly fill contact form and save")}>
-                <CartTotals />
+              <div onClick={()=>warning("kindly fill contact form and save")}>
+                <CartTotals grayed={"proceed-btn-gray"}/>
               </div>
             )}
           </div>

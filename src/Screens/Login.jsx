@@ -47,6 +47,7 @@ function Login() {
         console.log("result", result);
         if (result.user) {
           localStorage.setItem("user", JSON.stringify(result.user));
+          // localStorage.setItem("pageType", "list");
           setUser(result.user);
           if (intendedRoute){
             navigate(intendedRoute);

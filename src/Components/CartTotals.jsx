@@ -4,7 +4,7 @@ import { PaystackConsumer } from "react-paystack";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 
-function CartTotals({ pageprop, func }) {
+function CartTotals({ pageprop, grayed }) {
   const navigate = useNavigate();
   let page = pageprop;
 
@@ -100,7 +100,7 @@ function CartTotals({ pageprop, func }) {
       </label>
       {!page ? (
         <Link to="/proceed">
-          <Button btnClass="proceed-btn2 mt-4" btnText="Proceed To Checkout" />
+          <Button btnClass={`${grayed} || proceed-btn2 mt-4`} btnText="Proceed To Checkout" />
         </Link>
       ) : (
         <PaystackConsumer {...componentProps}>
