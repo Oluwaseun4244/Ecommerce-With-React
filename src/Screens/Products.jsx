@@ -71,22 +71,26 @@ function Products() {
 
   const leftbarFilter = (ev) => {
     if (ev.target.checked) {
-      products.filter((product, i)=>{
+      // console.log(ev.target.value)
+     const filtered = products.filter((product, i)=>{
         return (
-         setProducts( product.category === ev.target.value)
+         product.category === ev.target.value | product.brand === ev.target.value
+        //  setProducts(product.category === ev.target.value)
         )
+        
       })
+      setProducts(filtered)
 
-    //   console.log("filtered", ev.target.value);
-    //   fetch(`http://localhost:8000/api/filter/${ev.target.value}`)
-    //     .then((response) => response.json())
-    //     .then((filtered) => {
-    //       setProducts(filtered);
-    //     })
-    //     .catch();
-    // } else {
-    //   getProducts();
-    // }
+      // console.log("filtered", ev.target.value);
+      // fetch(`http://localhost:8000/api/filter/${ev.target.value}`)
+      //   .then((response) => response.json())
+      //   .then((filtered) => {
+      //     setProducts(filtered);
+      //   })
+      //   .catch();
+ 
+  }    else {
+    getProducts();
   }};
 
   const checkAndNotify = (product, id) => {
