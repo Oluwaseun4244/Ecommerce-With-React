@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 
 function CartTotals({ pageprop, grayed }) {
   const navigate = useNavigate();
-  let page = pageprop;
+  let page = pageprop || false;
 
   const { items, totalItems, cartTotal, emptyCart } = useCart();
 
@@ -20,7 +20,8 @@ function CartTotals({ pageprop, grayed }) {
   };
 
   const saveOrder = () => {
-    items.map((item, i) => {
+    items.map((item) => {
+     
       let payload = {
         user_id: `${user.id}`,
         product_id: `${item.id}`,
@@ -29,13 +30,15 @@ function CartTotals({ pageprop, grayed }) {
         product_total: `${item.itemTotal}`,
         trans_total: `${Math.round(cartTotal + cartTotal * 0.075)}`,
         trans_ref: `${config.reference}`,
-        trans_status: "pending",
+        trans_status: "pending"
       };
 
+      
       fetch("http://localhost:8000/api/add_transaction", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
+        
       })
         .then((response) => response.json())
         .then((response) => {

@@ -1,15 +1,10 @@
-import React, { useEffect, useState } from "react";
+// import React, { useState } from "react";
 import ".././Day1.css";
-import Filter from "../Components/Filter";
-import Footer from "../Components/Footer";
 import GridProduct from "../Components/GridProduct";
-import Header from "../Components/Header";
-import Leftbar from "../Components/Leftbar";
-import MobileNav from "../Components/MobileNav";
-import Nav from "../Components/Nav";
 import Product from "../Components/Product";
 import { useCart } from "react-use-cart";
-import { ToastContainer, Zoom, toast } from "react-toastify";
+import { Zoom, toast } from "react-toastify";
+
 
 toast.configure();
 const notify = (message) => {
@@ -30,157 +25,70 @@ const notify2 = () => {
   });
 };
 
-function Products() {
+function Products({ products, pageType }) {
   const { items, addItem, isEmpty } = useCart();
-  const [pageType, setPageType] = useState(true);
-  const [products, setProducts] = useState([]);
 
-  // const togrid = () => {
-  //   localStorage.setItem("pageType", "grid");
-  //   setPageType("grid");
-  // };
 
-  // const tolist = () => {
-  //   localStorage.setItem("pageType", "list");
-  //   setPageType("list");
-  // };
+  const checkAndNotify = (product, id) => {
+    //the (item) is a parameter waiting to be provided by function caller
+    //id was provided by the onClick
+    const checkItem = (item) => {
+      return item.id === id;
+    };
 
-  // let pageType = localStorage.getItem("pageType");
-
-  const getProducts = () => {
-    fetch("http://localhost:8000/api/products")
-      .then((response) => response.json())
-      .then((products) => {
-        // console.log("show me products", products);
-        setProducts(products);
-      });
-  };
-
-  const perPage = (productNum) => {
-    if (productNum > 0) {
-      fetch(`http://localhost:8000/api/products_per_page/${productNum}`)
-        .then((response) => response.json())
-        .then((product2) => {
-          //  console.log("e work o", product2.data);
-          setProducts(product2.data);
-        });
+    const inCart = items.findIndex(checkItem);
+    //findIndex maps over items, call checkItem() and provides each item as argument for checkItem
+    //if result condition isn't met, result is -1 and hence below
+    if (inCart > -1) {
+      notify2();
     } else {
-      getProducts();
+      addItem(product);
+      notify("Product has been added to cart");
     }
   };
 
-  const leftbarFilter = (ev) => {
-    if (ev.target.checked) {
-      // console.log(ev.target.value)
-     const filtered = products.filter((product, i)=>{
-        return (
-         product.category === ev.target.value | product.brand === ev.target.value
-        //  setProducts(product.category === ev.target.value)
-        )
-        
-      })
-      setProducts(filtered)
 
-      // console.log("filtered", ev.target.value);
-      // fetch(`http://localhost:8000/api/filter/${ev.target.value}`)
-      //   .then((response) => response.json())
-      //   .then((filtered) => {
-      //     setProducts(filtered);
-      //   })
-      //   .catch();
- 
-  }    else {
-    getProducts();
-  }};
-
-  const checkAndNotify = (product, id) => {
-
-    //the (item) is a parameter waiting to be provided by function caller
-    //id was provided by the onClick
-      const checkItem = (item)=>{
-        return item.id === id
-      }
-    //findIndex maps over items, call checkItem() and provides each item as argument for checkItem
-      const inCart = items.findIndex(checkItem)
-    //if result condition isn't met, result is -1 and hence below
-      if (inCart > -1){
-        notify2()
-      }else{
-          addItem(product);
-          notify("Product has been added to cart");
-      }
-
-  };
-
-  useEffect(() => {
-    // localStorage.setItem("pageType", "list");
-    getProducts();
-  }, []);
 
   return (
-    <div>
-      <Nav />
-      <Header desc="shop left sidebar" />
-      <MobileNav desc="shop left sidebar" />
-
-      <div className="container">
-        <div className="section-4">
-          <Filter
-                 grid={()=>setPageType(false)}
-                 list={()=>setPageType(true)}
-            func={(e) => perPage(e.target.value)}
-          />
+    <>
+      {pageType ? (
+        <div className="col-lg-9 list-card">
+          {products.map((product, i) => {
+            return (
+              <Product
+                key={i}
+                pic={product.product_image1}
+                productName={product.product_name}
+                price={product.price}
+                oldPrice={product.product_old_price}
+                description={product.product_description}
+                prod_id={product.id}
+                func={() => checkAndNotify(product, product.id)}
+              />
+            );
+          })}
         </div>
-        <div className="main">
+      ) : (
+        <div className="col-lg-9">
           <div className="row">
-            <Leftbar inputFunc={leftbarFilter} />
-            {pageType ? (
-              <div className="col-lg-9 list-card">
-                {products.map((product, i) => {
-                  return (
-                    <Product
-                      key={i}
-                      pic={product.product_image1}
-                      productName={product.product_name}
-                      price={product.price}
-                      oldPrice={product.product_old_price}
-                      description={product.product_description}
-                      prod_id={product.id}
-                      func={() => checkAndNotify(product, product.id)}
-                    />
-                  );
-                })}
-              </div>
-            ) : (
-              <div className="col-lg-9">
-                <div className="row">
-                  {products.map((product, i) => {
-                    return (
-                      <GridProduct
-                        key={i}
-                        pic={product.product_image1}
-                        productName={product.product_name}
-                        price={product.price}
-                        oldPrice={product.product_old_price}
-                        description={product.product_description}
-                        prod_id={product.id}
-                        func={() => checkAndNotify(product, product.id)}
-                      />
-                    );
-                  })}
-                </div>
-              </div>
-            ) }
+            {products.map((product, i) => {
+              return (
+                <GridProduct
+                  key={i}
+                  pic={product.product_image1}
+                  productName={product.product_name}
+                  price={product.price}
+                  oldPrice={product.product_old_price}
+                  description={product.product_description}
+                  prod_id={product.id}
+                  func={() => checkAndNotify(product, product.id)}
+                />
+              );
+            })}
           </div>
         </div>
-        <div className="supporter">
-          <img src="supporters.jpg" alt="" />
-        </div>
-      </div>
-      <Footer />
-
-      {/* JavaScript Bundle with Popper */}
-    </div>
+      )}
+    </>
   );
 }
 

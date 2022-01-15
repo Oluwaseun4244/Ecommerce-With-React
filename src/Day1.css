@@ -261,13 +261,13 @@
   padding-right: 2rem;
 }
 
-.supporter {
+/* .supporter {
   text-align: center;
   padding: 4rem 0;
 }
 .supporter img {
   width: 60%;
-}
+} */
 
 /* FOOTER */
 
@@ -1626,6 +1626,11 @@
     height: 139px;
     margin-inline: 25%;
   } */
+
+
+  .paginate{
+    margin-block: 500px;
+  }
   
 
   .grid-div {

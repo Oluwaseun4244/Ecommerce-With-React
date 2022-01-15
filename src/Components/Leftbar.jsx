@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Button from "./Button";
 
-function Leftbar({ inputFunc }) {
+function Leftbar({ inputFunc, priceFunc }) {
   const [brands, setBrands] = useState([]);
   const [categories, setCategories] = useState([]);
 
@@ -34,13 +34,13 @@ function Leftbar({ inputFunc }) {
         <ul className="right-filter-ul">
           {brands.map((brand, i) => {
             return (
-              <li className>
+              <li key={i}>
                 <input
+                  
                   value={brand.brand}
                   onChange={inputFunc}
                   className="form-check-input"
                   type="checkbox"
-                  defaultValue
                   id="flexCheckDefault"
                 />
                 <label className="form-check-label">{brand.brand}</label>
@@ -52,15 +52,16 @@ function Leftbar({ inputFunc }) {
       <div className="right-filter">
         <p>Categories</p>
         <ul className="right-filter-ul">
-          {categories.map((category, i) => {
+          {categories.map((category, index) => {
             return (
-              <li >
-                <input
+              <li key={index}>
+              <input
+                  
                   value={category.category}
                   onChange={inputFunc}
                   className="form-check-input"
                   type="checkbox"
-                  defaultValue
+                  // name={category.id}
                   id="flexCheckDefault"
                 />
                 <label className="form-check-label">{category.category}</label>
@@ -72,51 +73,54 @@ function Leftbar({ inputFunc }) {
       <div className="right-filter">
         <p>Price Filter</p>
         <ul className="right-filter-ul">
-          <li className>
+          <li>
             <input
               className="form-check-input"
               type="checkbox"
-              defaultValue
-              id="flexCheckDefault"
+              id={0}
+              name="price"
+              value={3000}
+              onChange={priceFunc}
             />
-            <label className="form-check-label">$0.00 - $150.00</label>
+            <label className="form-check-label">N0 - N3,000</label>
           </li>
-          <li className>
+          <li>
             <input
               className="form-check-input"
               type="checkbox"
-              defaultValue
-              id="flexCheckDefault"
+              id={3000}
+              name="price"
+              value={6000}
+              onChange={priceFunc}
             />
-            <label className="form-check-label">$150.00 - $350.00</label>
+            <label className="form-check-label">N3,000 - N6,000</label>
           </li>
-          <li className>
+          <li>
             <input
               className="form-check-input"
               type="checkbox"
-              defaultValue
-              id="flexCheckDefault"
+              id={6000}
+              name="price"
+              value={10000}
+              onChange={priceFunc}
             />
-            <label className="form-check-label">$150.00 - $504.00</label>
+            <label className="form-check-label">N6,000 - N10,000</label>
           </li>
-          <li className>
+          <li>
             <input
               className="form-check-input"
               type="checkbox"
-              defaultValue
-              id="flexCheckDefault"
+              id={10000}
+              name="price"
+              value={1000000000}
+              onChange={priceFunc}
             />
-            <label className="form-check-label">$450.00 +</label>
+            <label className="form-check-label">N10,000 +</label>
           </li>
         </ul>
       </div>
       <span className="bottom-search">
-        <input
-          type="text"
-          size
-          className="search-text1"
-          style={{ width: "50%" }}
-        />
+        <input type="text" className="search-text1" style={{ width: "50%" }} />
         <Button
           btnClass="search-btn"
           iconClass="fa fa-search input-search-icon"

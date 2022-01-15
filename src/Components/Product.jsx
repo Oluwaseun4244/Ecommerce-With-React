@@ -29,7 +29,7 @@ function Product({
                 <p className="card-title">{productName}</p>
               </div>
               <div className="col-lg-8">
-                <div className>
+                <div>
                   <span className="sm-circle bg-warning " />
                   <span className="sm-circle bg-danger" />
                   <span className="sm-circle bg-primary" />

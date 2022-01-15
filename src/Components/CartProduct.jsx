@@ -53,7 +53,7 @@ function CartProduct({ img, price, qty, item, name }) {
               <i
                 style={{ cursor: "pointer" }}
                 class="fa fa-minus"
-                // aria-hidden="true"
+                
                 onClick={() => updateItemQuantity(item.id, item.quantity - 1)}
               ></i>
               <span>{qty}</span>

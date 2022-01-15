@@ -17,12 +17,12 @@ import Faq from './Screens/Faq';
 import SingleBlog from './Screens/SingleBlog';
 import About from './Screens/About';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Contact from './Screens/Contact';
 import { useState } from 'react';
 import { userContext } from './Context/userContext';
 import { CartProvider } from 'react-use-cart';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ShowProducts from './Screens/ShowProducts';
 
 
 toast.configure()
@@ -42,14 +42,14 @@ function App() {
     <Route path="/about" element={<About/>}/>
     <Route path="/completed" element={<OrderCompleted/>}/>
     <Route path="/shop" element={<ShopList/>}/>
-    <Route path="/products" element={<Products/>}/>
+    <Route path="/products" element={<ShowProducts/>}/>
     <Route path="/register" element={<Register/>}/>
     <Route path="/error" element={<Error/>}/>
     <Route path="/proceed" element={<ShippingInfo/>}/>
     <Route path="/shipping-info" element={<ShippingInfo/>}/>
     <Route path="/faq" element={<Faq/>}/>
     <Route path="/product/:prod_id" element={<OneProduct/>}/>
-    <Route path="/products" element={<Products/>}/>
+    <Route path="/products" element={<ShowProducts/>}/>
     <Route path="/cart" element={<ShoppingCart/>}/>
     <Route path="/blog/:blog_id" element={<SingleBlog/>}/>
     <Route path="/contact" element={<ShippingInfo/>}/>
