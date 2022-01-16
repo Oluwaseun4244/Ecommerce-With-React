@@ -7,33 +7,11 @@ import Header from "../Components/Header";
 import MobileNav from "../Components/MobileNav";
 import Nav from "../Components/Nav";
 import { useCart } from "react-use-cart";
-import notify  from '.././Context/userContext';
-// import { ToastContainer, Zoom, toast } from "react-toastify";
-// toast.configure();
-
-
-// const warning = (message) => {
-//   toast.warn(message, {
-//     position: toast.POSITION.TOP_CENTER,
-//     autoClose: 2500,
-//     toastId: "01",
-//     transition: Zoom,
-//   });
-// };
-
-// const notify = (message) => {
-//   toast.success(message, {
-//     position: toast.POSITION.TOP_CENTER,
-//     autoClose: 2500,
-//     toastId: "01",
-//     transition: Zoom,
-//   });
-// };
+import notify from ".././Context/userContext";
 
 
 function ShippingInfo() {
   let user = JSON.parse(localStorage.getItem("user"));
-  // const [errorMsg, setErrorMsg] = useState();
   const [contactUser, setContactUser] = useState(false);
 
   const { items } = useCart();
@@ -50,11 +28,12 @@ function ShippingInfo() {
     postal_code: "",
   });
 
-
-
   const handleChange = (e) => {
     setContact({ ...contact, [e.target.id]: e.target.value });
   };
+
+
+  //THIS HANDLES CONTACT SAVING
 
   const handleContact = () => {
     const payload = {
@@ -82,15 +61,17 @@ function ShippingInfo() {
     fetch("http://127.0.0.1:8000/api/add_contact", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        notify("Contact info has been saved", "success")
+        notify("Contact info has been saved", "success");
       })
       .catch((error) => console.log("error", error));
   };
 
+
+
+  // THIS HANDLES CONTACT UDDATE
   const contactUpdate = () => {
     const payload2 = {
-      ...contact
-
+      ...contact,
     };
 
     var myHeaders = new Headers();
@@ -106,17 +87,18 @@ function ShippingInfo() {
     fetch("http://127.0.0.1:8000/api/update_contact", requestOptions2)
       .then((response) => response.json())
       .then((result) => {
-        if (result === 1){
-
-          notify("Contact info has been updated", "success")
+        if (result === 1) {
+          notify("Contact info has been updated", "success");
         } else {
-          notify("Ensure all fields are filled", "warn")
-          console.log(result)
+          notify("Ensure all fields are filled", "warn");
+          console.log(result);
         }
       })
       .catch((error) => console.log("error", error));
   };
 
+
+  // FETCHES CONTACT INFO FOR LOGGED IN USER UPON REACHING THIS PAGE
   const getContact = () => {
     fetch(`http://127.0.0.1:8000/api/get_contact/${user.id}`)
       .then((response) => response.json())
@@ -124,13 +106,11 @@ function ShippingInfo() {
         if (user_contact.length > 0) {
           setContactUser(true);
           setContact(user_contact[0]);
-
         } else {
           console.log("contact not found for logged in user");
         }
       });
   };
-
 
   useEffect(() => {
     getContact();
@@ -193,7 +173,7 @@ function ShippingInfo() {
                     />
                   </div>
                 </div>
-            {/* <p style={{color:"red"}}>{error.address}</p> */}
+                {/* <p style={{color:"red"}}>{error.address}</p> */}
                 <input
                   id="address"
                   required
@@ -277,8 +257,12 @@ function ShippingInfo() {
             {contactUser ? (
               <CartTotals pageprop={true} />
             ) : (
-              <div onClick={()=>notify("kindly fill contact form and save", "warn")}>
-                <CartTotals grayed={"proceed-btn-gray"}/>
+              <div
+                onClick={() =>
+                  notify("kindly fill contact form and save", "warn")
+                }
+              >
+                <CartTotals grayed={"proceed-btn-gray"} />
               </div>
             )}
           </div>

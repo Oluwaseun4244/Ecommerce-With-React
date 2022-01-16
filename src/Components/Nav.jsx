@@ -170,7 +170,7 @@ function Nav() {
       <nav className="navbar head2 close navbar-expand-lg navbar-light bg-light">
         <div className="container">
           <Link className="navbar-brand navbar-brand-b" to="/home">
-            TOSU
+            Tosu
           </Link>
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">

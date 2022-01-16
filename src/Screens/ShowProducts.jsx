@@ -7,7 +7,6 @@ import MobileNav from "../Components/MobileNav";
 import Nav from "../Components/Nav";
 import Products from "./Products";
 import ReactPaginate from "react-paginate";
-// import PaginateItems from "../Components/PaginateItems";
 
 function ShowProducts() {
   const [products, setProducts] = useState([]);
@@ -17,6 +16,9 @@ function ShowProducts() {
   const [pageType, setPageType] = useState(true);
   const [productPerPage, setPerPage] = useState(3)
 
+
+//GET ALL PRODUCTS FROM BACKEND
+
   const getProducts = () => {
     fetch("http://localhost:8000/api/products")
       .then((response) => response.json())
@@ -25,26 +27,32 @@ function ShowProducts() {
         setProducts(products);
         const endOffset = itemOffset + productPerPage;
         setCurrentItems(products.slice(itemOffset, endOffset));
-        setPageCount(Math.ceil(products.length / 3));
+        setPageCount(Math.ceil(products.length / productPerPage));
       })
       .catch((error) => {
         console.log("please show me the error", error);
       });
   };
 
+  // GETTING PRODUCTS FROM BACKEND ENDS HERE
+
+
+
+  // NUMBER OF PRODUCTS PER PAGE
+
   const perPage = (productNum) => {
     if (productNum > 0) {
-    //   fetch(`http://localhost:8000/api/products_per_page/${productNum}`)
-    //     .then((response) => response.json())
-    //     .then((product2) => {
-    //       //  console.log("e work o", product2.data);
-    //       setCurrentItems(product2.data);
-    //     });
+
     setPerPage(productNum)
     } else {
         setPerPage(3);
     }
   };
+
+    // NUMBER OF PRODUCTS PER PAGE
+
+
+  //BRAND AND CAGEGORY FILTERING
 
   const brandAndCategoryFilter = (ev) => {
     if (ev.target.checked) {
@@ -58,17 +66,15 @@ function ShowProducts() {
       });
       setCurrentItems(filtered);
 
-      // console.log("filtered", ev.target.value);
-      // fetch(`http://localhost:8000/api/filter/${ev.target.value}`)
-      //   .then((response) => response.json())
-      //   .then((filtered) => {
-      //     setProducts(filtered);
-      //   })
-      //   .catch();
+ 
     } else {
       getProducts();
     }
   };
+
+  //BRAND AND CAGEGORY FILTERING ENDS
+
+  //PRICE FILTERING
 
   const priceFilter = (ev) => {
     if (ev.target.checked) {
@@ -86,6 +92,9 @@ function ShowProducts() {
     }
   };
 
+  //PRICE FILTERING ENDS
+
+
   //PAGINATION!!!
 
   const handlePageClick = (event) => {
@@ -96,14 +105,11 @@ function ShowProducts() {
     setItemOffset(newOffset);
   };
 
+  //PAGINATION ENDS 
+
   useEffect(() => {
     getProducts();
-    // const endOffset = itemOffset + 3;
-    // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-    // setCurrentItems(products.slice(itemOffset, endOffset));
-    // setPageCount(Math.ceil(products.length / 3));
-    // console.log("current Items", currentItems);
-    // console.log("current Items", currentItems);
+
   }, [itemOffset, productPerPage]);
 
   return (
@@ -127,7 +133,6 @@ function ShowProducts() {
             />
             <Products products={currentItems} pageType={pageType} />
 
-            {/* < PaginateItems itemsPerPage={3} products={products} /> */}
 
             <div className="col-lg-12 mb-5">
               <ReactPaginate

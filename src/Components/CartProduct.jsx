@@ -35,7 +35,7 @@ function CartProduct({ img, price, qty, item, name }) {
       <div className="row">
         <div className="col-lg-6">
           <div className="row">
-            <div className="col-lg-3 ">
+            <div className="col-lg-4 ">
               <img
                 className="cart-img"
                 src={`http://localhost:8000/${img}`}
@@ -43,7 +43,7 @@ function CartProduct({ img, price, qty, item, name }) {
               />
             </div>
 
-            <div className="col-lg-9">
+            <div className="col-lg-8">
               <h6>{name}</h6>
               <p>Color: Brown </p>
               <p>Size: XL</p>
@@ -58,14 +58,14 @@ function CartProduct({ img, price, qty, item, name }) {
             <h6 className="pt-4">
               <i
                 style={{ cursor: "pointer" }}
-                class="fa fa-minus"
+                className="fa fa-minus"
                 onClick={() => updateItemQuantity(item.id, item.quantity - 1)}
               ></i>
               <span>{qty}</span>
               <span>
                 <i
                   style={{ cursor: "pointer" }}
-                  class="fa fa-plus"
+                  className="fa fa-plus"
                   onClick={() => updateItemQuantity(item.id, item.quantity + 1)}
                 ></i>
               </span>

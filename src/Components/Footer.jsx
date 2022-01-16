@@ -11,7 +11,7 @@ export default function Footer() {
         <div className="container">
           <div className="row">
             <div className="col-lg-4 col-md-12 ">
-              <p className="footer-logo">Hekto</p>
+              <p className="footer-logo">Tosu</p>
               <div className="footer-contactus">
                 <input
                   className="input-footer"
