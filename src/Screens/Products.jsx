@@ -2,28 +2,29 @@
 import ".././Day1.css";
 import GridProduct from "../Components/GridProduct";
 import Product from "../Components/Product";
+import notify  from '.././Context/userContext';
 import { useCart } from "react-use-cart";
-import { Zoom, toast } from "react-toastify";
 
 
-toast.configure();
-const notify = (message) => {
-  toast.success(message, {
-    position: toast.POSITION.TOP_CENTER,
-    autoClose: 1500,
-    toastId: "01",
-    transition: Zoom,
-  });
-};
 
-const notify2 = () => {
-  toast.warn("Product already in cart", {
-    position: toast.POSITION.TOP_CENTER,
-    autoClose: 1500,
-    toastId: "01",
-    transition: Zoom,
-  });
-};
+// toast.configure();
+// const notify = (message) => {
+//   toast.success(message, {
+//     position: toast.POSITION.TOP_CENTER,
+//     autoClose: 1500,
+//     toastId: "01",
+//     transition: Zoom,
+//   });
+// };
+
+// const notify2 = () => {
+//   toast.warn("Product already in cart", {
+//     position: toast.POSITION.TOP_CENTER,
+//     autoClose: 1500,
+//     toastId: "01",
+//     transition: Zoom,
+//   });
+// };
 
 function Products({ products, pageType }) {
   const { items, addItem, isEmpty } = useCart();
@@ -40,10 +41,10 @@ function Products({ products, pageType }) {
     //findIndex maps over items, call checkItem() and provides each item as argument for checkItem
     //if result condition isn't met, result is -1 and hence below
     if (inCart > -1) {
-      notify2();
+      notify("Product already in cart", "warn");
     } else {
       addItem(product);
-      notify("Product has been added to cart");
+      notify("Product has been added to cart", "success");
     }
   };
 

@@ -54,7 +54,7 @@ function Nav() {
             >
               <li className="nav-item dropdown">
                 <Link
-                  className="nav-link dropdown-toggle  anc"
+                  className="nav-link   anc"
                   to="#"
                   id="navbarDropdown"
                   role="button"
@@ -86,14 +86,14 @@ function Nav() {
               </li>
               <li className="nav-item dropdown">
                 <Link
-                  className="nav-link anc dropdown-toggle"
+                  className="nav-link anc "
                   to="#"
                   id="navbarDropdown"
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  USD
+                  NGN
                 </Link>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li>
@@ -158,8 +158,8 @@ function Nav() {
                   // </Link>
                 ) :  (   <Link className="nav-link anc" to="/cart">
                 <div>
-                  <i className="fa fa-shopping-cart cart-num" />
-                  {totalUniqueItems}
+                  <i className="fa fa-shopping-cart " />
+                 <span className="cart-num" >{ totalUniqueItems}</span> 
                 </div>
                 </Link>)}
               </li>
@@ -170,7 +170,7 @@ function Nav() {
       <nav className="navbar head2 close navbar-expand-lg navbar-light bg-light">
         <div className="container">
           <Link className="navbar-brand navbar-brand-b" to="/home">
-            Hekto
+            TOSU
           </Link>
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">

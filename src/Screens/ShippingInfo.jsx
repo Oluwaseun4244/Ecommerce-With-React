@@ -7,27 +7,28 @@ import Header from "../Components/Header";
 import MobileNav from "../Components/MobileNav";
 import Nav from "../Components/Nav";
 import { useCart } from "react-use-cart";
-import { ToastContainer, Zoom, toast } from "react-toastify";
-toast.configure();
+import notify  from '.././Context/userContext';
+// import { ToastContainer, Zoom, toast } from "react-toastify";
+// toast.configure();
 
 
-const warning = (message) => {
-  toast.warn(message, {
-    position: toast.POSITION.TOP_CENTER,
-    autoClose: 2500,
-    toastId: "01",
-    transition: Zoom,
-  });
-};
+// const warning = (message) => {
+//   toast.warn(message, {
+//     position: toast.POSITION.TOP_CENTER,
+//     autoClose: 2500,
+//     toastId: "01",
+//     transition: Zoom,
+//   });
+// };
 
-const notify = (message) => {
-  toast.success(message, {
-    position: toast.POSITION.TOP_CENTER,
-    autoClose: 2500,
-    toastId: "01",
-    transition: Zoom,
-  });
-};
+// const notify = (message) => {
+//   toast.success(message, {
+//     position: toast.POSITION.TOP_CENTER,
+//     autoClose: 2500,
+//     toastId: "01",
+//     transition: Zoom,
+//   });
+// };
 
 
 function ShippingInfo() {
@@ -81,7 +82,7 @@ function ShippingInfo() {
     fetch("http://127.0.0.1:8000/api/add_contact", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        notify("Contact info has been saved")
+        notify("Contact info has been saved", "success")
       })
       .catch((error) => console.log("error", error));
   };
@@ -107,9 +108,9 @@ function ShippingInfo() {
       .then((result) => {
         if (result === 1){
 
-          notify("Contact info has been updated")
+          notify("Contact info has been updated", "success")
         } else {
-          warning("Ensure all fields are filled")
+          notify("Ensure all fields are filled", "warn")
           console.log(result)
         }
       })
@@ -268,6 +269,7 @@ function ShippingInfo() {
                   image={item.product_image1}
                   name={item.product_name}
                   price={item.price}
+                  qty={item.quantity}
                 />
               );
             })}
@@ -275,7 +277,7 @@ function ShippingInfo() {
             {contactUser ? (
               <CartTotals pageprop={true} />
             ) : (
-              <div onClick={()=>warning("kindly fill contact form and save")}>
+              <div onClick={()=>notify("kindly fill contact form and save", "warn")}>
                 <CartTotals grayed={"proceed-btn-gray"}/>
               </div>
             )}

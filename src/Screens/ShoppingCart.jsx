@@ -8,21 +8,10 @@ import MobileNav from "../Components/MobileNav";
 import Nav from "../Components/Nav";
 import { useCart } from "react-use-cart";
 import Button from "../Components/Button";
-import { BsCartDash } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
-import { ToastContainer, toast, Slide, Zoom, Flip, Bounce } from "react-toastify";
-
-
-toast.configure();
-const notify = () => {
-  toast.error("Cart Cleared!", {
-    position: toast.POSITION.TOP_CENTER,
-    autoClose: 2000,
-    toastId: '03',
-    transition: Zoom
-  });
-};
+import notify  from '.././Context/userContext';
+// import { ToastContainer, toast, Slide, Zoom, Flip, Bounce } from "react-toastify";
 
 
 
@@ -31,17 +20,12 @@ function ShoppingCart() {
   const {
     items,
     isEmpty,
-    totalItems,
-    totalUniqueItems,
-    cartTotal,
-    updateItemQuantity,
-    removeItem,
     emptyCart,
   } = useCart();
 
 const clearAndNotify = () => {
   emptyCart();
-  notify();
+  notify("Cart Cleared!", "error");
 }
 
   return (
@@ -68,12 +52,18 @@ const clearAndNotify = () => {
                 </div>
               </div>
               {isEmpty ? (
-                <h6 style={{ color: "red" }} className="empty-cart text-center">
+                < >
+                <h4 style={{ color: "#c91641" }} className="empty-cart text-center">
                   Your Cart is empty!{" "}
                   <span style={{ color: "black" }}>
-                    <BsCartDash />
+                    {/* <BsCartDash /> */}
                   </span>
-                </h6>
+                </h4>
+                <div className="empty-cart-div">
+
+                <img src=".././images/empty_cart.png" alt="" />
+                </div>
+                </>
               ) : (
                 <>
                   {items.map((item, i) => {
@@ -115,16 +105,18 @@ const clearAndNotify = () => {
                 )}
               </div>
             </div>
-            <div className="col-lg-4">
+            {!isEmpty &&  <div className="col-lg-4">
               <h6 style={{ textAlign: "center" }} className="mb-4">
                 Cart Totals
               </h6>
+              
               <CartTotals />
-              <h6 style={{ textAlign: "center" }} className="mb-4 mt-4">
+              {/* <h6 style={{ textAlign: "center" }} className="mb-4 mt-4">
                 Calculate Shopping
               </h6>
-              <CalculateShopping />
+              <CalculateShopping /> */}
             </div>
+             }
           </div>
         </div>
       </div>

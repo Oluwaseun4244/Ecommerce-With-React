@@ -12,7 +12,7 @@ function Filter({grid, list, func}) {
         <div className="col-lg-6 d-inline-flex">
           <div className="search-div1">
             <span className="search-text">Per Page:</span>
-            <input className="search-input" onChange={func} size={1} type="text" />
+            <input className="search-input" onChange={func} size={1} type="number" />
           </div>
           <div className="search-div2">
             <span className="search-text">Sort By:</span>
@@ -20,17 +20,17 @@ function Filter({grid, list, func}) {
               className="search-input"
               aria-label=".form-select-sm select example"
             >
-              <option defaultValue>Best Match</option>
+              {/* <option defaultValue>Best Match</option>
               <option value={1}>One</option>
               <option value={2}>Two</option>
-              <option value={3}>Three</option>
+              <option value={3}>Three</option> */}
             </select>
           </div>
           <div className="search-div3">
             <span className="search-text">View:</span>
             <i onClick={list} className="fa fa-list list" />
             <i onClick={grid} className="fa fa-th-large grid" />
-            <input className="search-input" size={15} type="text" />
+            {/* <input className="search-input" size={15} type="text" /> */}
           </div>
         </div>
       </div>

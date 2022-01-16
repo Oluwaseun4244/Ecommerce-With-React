@@ -2,7 +2,6 @@ import './App.css';
 import "./Day1.css";
 import "./Homepage.css";
 import "./Faq.css";
-import Products from './Screens/Products';
 import Login from './Screens/Login';
 import OrderCompleted from './Screens/OrderCompleted';
 import ShippingInfo from './Screens/ShippingInfo';

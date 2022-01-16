@@ -129,7 +129,7 @@ function ShowProducts() {
 
             {/* < PaginateItems itemsPerPage={3} products={products} /> */}
 
-            <div className="col-lg-12">
+            <div className="col-lg-12 mb-5">
               <ReactPaginate
                 breakLabel="..."
                 nextLabel=">>"
