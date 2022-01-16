@@ -1,8 +1,4 @@
-/* Beginning of solomon's CSS */
-/* @import "~bootstrap/scss/bootstrap"; */
-/* *{
-  background-color:  #E5E5E5;
-} */
+
 
 .head1 {
   background-color: #7e33e0 !important;
@@ -481,10 +477,7 @@
   margin-top: 80px;
 }
 
-.order-completed-note {
-  /* margin-left: 75%; */
-  /* margin-top: 145%; */
-}
+
 
 .demo-txt {
   font-family: Roboto;
@@ -511,8 +504,7 @@
 }
 .contact-info-p {
   display: inline-block;
-  /* margin-left: 38%; */
-  float: right;
+  /* float: right; */
 }
 
 .info-div {
@@ -1279,11 +1271,7 @@
   margin-inline: 2%;
 }
 
-.mobile-icon {
-  /* margin-inline: 10%; */
-  /* width: 100%; */
-  /* margin-right: 20px; */
-}
+
 
 /* about page begins */
 .about {
@@ -1448,6 +1436,23 @@
   color: red;
   margin-left: 10px;
 } */
+
+/* .cart-prod-qty{
+  border: 1px solid gray;
+  width: 20px;
+  height: 30px;
+} */
+
+.increament-div{
+padding-left: 1px;
+padding-top: 1.6%;
+/* margin-left: 1px; */
+/* margin-inline: 1%; */
+}
+
+.qty{
+  margin-inline: 9px;
+}
 
 * contact us begins */ .contact {
   margin-top: 120px;
@@ -1626,16 +1631,16 @@
   }
 
   .clear-cart-btn {
-    float: none;
-    height: 39px;
+    /* float: right; */
     width: 134px;
     margin-top: 20px;
+    padding: 2%;
   }
 
   .update-cart-btn {
-    float: none;
-    margin-top: 20px;
-    padding: 4% 2%;
+    /* float: left; */
+    padding: 2%;
+    /* padding: 3% 3%; */
   }
 
   .cat-flex ul {

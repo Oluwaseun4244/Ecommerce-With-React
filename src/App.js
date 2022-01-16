@@ -1,5 +1,5 @@
 import './App.css';
-import "./Day1.css";
+import "./Main.css";
 import "./Homepage.css";
 import "./Faq.css";
 import Login from './Screens/Login';

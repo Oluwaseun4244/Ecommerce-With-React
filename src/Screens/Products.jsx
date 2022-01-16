@@ -1,5 +1,4 @@
-// import React, { useState } from "react";
-import ".././Day1.css";
+import React from "react";
 import GridProduct from "../Components/GridProduct";
 import Product from "../Components/Product";
 import notify  from '.././Context/userContext';

@@ -1,7 +1,7 @@
 import { FaTimes } from "react-icons/fa";
 import { useCart } from "react-use-cart";
 import notify from ".././Context/userContext";
-import addCommas  from '.././Context/addComma';
+import addCommas from ".././Context/addComma";
 // import { ToastContainer, toast, Slide, Zoom, Flip, Bounce} from "react-toastify";
 
 // toast.configure();
@@ -13,9 +13,6 @@ import addCommas  from '.././Context/addComma';
 //     transition: Zoom
 //   });
 // };
-
-
-
 
 function CartProduct({ img, price, qty, item, name }) {
   const { removeItem, updateItemQuantity } = useCart();
@@ -33,9 +30,9 @@ function CartProduct({ img, price, qty, item, name }) {
         onClick={() => removeAndNotify(item.id)}
       />
       <div className="row">
-        <div className="col-lg-6">
+        <div className="col-lg-6 col-sm-12">
           <div className="row">
-            <div className="col-lg-4 ">
+            <div className="col-lg-4 col-sm-4">
               <img
                 className="cart-img"
                 src={`http://localhost:8000/${img}`}
@@ -53,25 +50,42 @@ function CartProduct({ img, price, qty, item, name }) {
         <div className="col-lg-2">
           <p className="pt-4">N{addCommas(price)}</p>
         </div>
-        <div className="col-lg-2">
-          <div>
-            <h6 className="pt-4">
-              <i
-                style={{ cursor: "pointer" }}
-                className="fa fa-minus"
-                onClick={() => updateItemQuantity(item.id, item.quantity - 1)}
-              ></i>
-              <span>{qty}</span>
-              <span>
-                <i
-                  style={{ cursor: "pointer" }}
-                  className="fa fa-plus"
-                  onClick={() => updateItemQuantity(item.id, item.quantity + 1)}
-                ></i>
-              </span>
-            </h6>
-          </div>
+        <div className="col-lg-2 col-md-12 increament-div">
+          <span className="">
+            <button
+              type="button"
+              class="btn btn-light"
+              onClick={() => updateItemQuantity(item.id, item.quantity - 1)}
+            >
+              <span class="glyphicon glyphicon-minus">-</span>
+            </button>
+          </span>
+          <span className="qty">{qty}</span>
+          <span class="">
+            <button
+              type="button"
+              class="btn btn-light"
+              onClick={() => updateItemQuantity(item.id, item.quantity + 1)}
+            >
+              <span class="glyphicon glyphicon-plus">+</span>
+            </button>
+          </span>
         </div>
+        {/* <div className="col-lg-2 pt-4 cart-prod-qty">
+            <i
+              style={{ cursor: "pointer" }}
+              className="fa fa-minus"
+              onClick={() => updateItemQuantity(item.id, item.quantity - 1)}
+            ></i>
+
+            <span className="">{qty}</span>
+
+            <i
+              style={{ cursor: "pointer" }}
+              className="fa fa-plus "
+              onClick={() => updateItemQuantity(item.id, item.quantity + 1)}
+            ></i>
+        </div> */}
         <div className="col-lg-2">
           <p className="pt-4">N{addCommas(price * qty)}</p>
         </div>

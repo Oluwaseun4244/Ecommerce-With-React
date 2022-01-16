@@ -49,7 +49,7 @@ function Nav() {
               </li>
             </ul>
             <ul
-              style={{ paddingLeft: "45px" }}
+              style={{ paddingLeft: "7%" }}
               className="navbar-nav ul1 me-auto mb-2 mb-lg-0"
             >
               <li className="nav-item dropdown">
