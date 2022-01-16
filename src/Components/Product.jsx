@@ -1,5 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import addCommas  from '.././Context/addComma';
+
+
 
 function Product({
   pic,
@@ -8,8 +11,12 @@ function Product({
   oldPrice,
   description,
   prod_id,
-  func,
-}) {
+  func
+}) 
+
+
+
+{
   return (
     <div className="card mb-4">
       <div className="card-body">
@@ -37,8 +44,8 @@ function Product({
               </div>
             </div>
             <div className="prices">
-              <span className="card-price">N{price}.00</span>
-              <span className="card-price-former">N{oldPrice}</span>
+              <span className="card-price">N{addCommas(price)}.00</span>
+              <span className="card-price-former">N{addCommas(oldPrice)}</span>
               <span>
                 <i className="fa fa-star" />
                 <i className="fa fa-star" />

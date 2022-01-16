@@ -3,10 +3,15 @@ import { useCart } from "react-use-cart";
 import { PaystackConsumer } from "react-paystack";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
+import addCommas  from '.././Context/addComma';
 
 function CartTotals({ pageprop, grayed }) {
   const navigate = useNavigate();
   let page = pageprop || false;
+
+  // const addCommas = (num) =>
+  //   num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  // const removeNonNumeric = (num) => num.toString().replace(/[^0-9]/g, "");
 
   const { items, totalItems, cartTotal, emptyCart } = useCart();
 
@@ -21,7 +26,6 @@ function CartTotals({ pageprop, grayed }) {
 
   const saveOrder = () => {
     items.map((item) => {
-     
       let payload = {
         user_id: `${user.id}`,
         product_id: `${item.id}`,
@@ -30,32 +34,26 @@ function CartTotals({ pageprop, grayed }) {
         product_total: `${item.itemTotal}`,
         trans_total: `${Math.round(cartTotal + cartTotal * 0.075)}`,
         trans_ref: `${config.reference}`,
-        trans_status: "pending"
+        trans_status: "pending",
       };
 
-      
       fetch("http://localhost:8000/api/add_transaction", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
-        
       })
         .then((response) => response.json())
         .then((response) => {
           console.log("did it work?", response);
         })
         .catch();
-
     });
   };
 
   const handleSuccess = () => {
-
     fetch(`http://localhost:8000/api/update_status/${reference}`)
-    .then((response) => response.json())
-      .then((updated) => {
-        
-      })
+      .then((response) => response.json())
+      .then((updated) => {})
       .catch((error) => {
         console.log(error);
       });
@@ -76,10 +74,16 @@ function CartTotals({ pageprop, grayed }) {
     onClose: handleClose,
   };
 
+  let total = Math.round(cartTotal + cartTotal * 0.075);
+
   return (
     <div className="total-checkout">
       <h4 className="mt-2 cart-total-txt">
-        Subtotals <span style={{ float: "right" }}>N{cartTotal}.00</span>
+        Subtotals{" "}
+        <span style={{ float: "right" }}>
+          N{addCommas(cartTotal)}
+          {/* N{addCommas(removeNonNumeric(cartTotal))} */}
+        </span>
       </h4>
       <hr />
       <h4 className="mt-4 cart-total-txt2">
@@ -89,7 +93,8 @@ function CartTotals({ pageprop, grayed }) {
       <h4 className="mt-4 cart-total-txt2">
         Total + VAT{" "}
         <span style={{ float: "right" }}>
-          N{Math.round(cartTotal + cartTotal * 0.075)}
+        N{addCommas(total)}
+          {/* N{addCommas(removeNonNumeric(total))} */}
         </span>
       </h4>
       <hr />
@@ -103,7 +108,10 @@ function CartTotals({ pageprop, grayed }) {
       </label>
       {!page ? (
         <Link to="/proceed">
-          <Button btnClass={`${grayed} || proceed-btn2 mt-4`} btnText="Proceed To Checkout" />
+          <Button
+            btnClass={`${grayed} || proceed-btn2 mt-4`}
+            btnText="Proceed To Checkout"
+          />
         </Link>
       ) : (
         <PaystackConsumer {...componentProps}>

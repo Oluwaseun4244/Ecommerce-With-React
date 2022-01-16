@@ -26,6 +26,8 @@ import { useCart } from "react-use-cart";
 //   });
 // };
 
+
+
 function Products({ products, pageType }) {
   const { items, addItem, isEmpty } = useCart();
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import addCommas  from '.././Context/addComma';
 
 function GridProduct({
   productName,
@@ -37,9 +38,9 @@ function GridProduct({
               <span className="sm-circle bg-primary" />
             </div>
             <p>
-              N{price}.00{" "}
+              N{addCommas(price)}.00{" "}
               <span style={{ textDecoration: "line-through" }}>
-                N{oldPrice}.00
+                N{addCommas(oldPrice)}
               </span>
             </p>
           </div>

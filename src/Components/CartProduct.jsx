@@ -1,6 +1,7 @@
 import { FaTimes } from "react-icons/fa";
 import { useCart } from "react-use-cart";
 import notify from ".././Context/userContext";
+import addCommas  from '.././Context/addComma';
 // import { ToastContainer, toast, Slide, Zoom, Flip, Bounce} from "react-toastify";
 
 // toast.configure();
@@ -12,6 +13,9 @@ import notify from ".././Context/userContext";
 //     transition: Zoom
 //   });
 // };
+
+
+
 
 function CartProduct({ img, price, qty, item, name }) {
   const { removeItem, updateItemQuantity } = useCart();
@@ -47,7 +51,7 @@ function CartProduct({ img, price, qty, item, name }) {
           </div>
         </div>
         <div className="col-lg-2">
-          <p className="pt-4">N{price}</p>
+          <p className="pt-4">N{addCommas(price)}</p>
         </div>
         <div className="col-lg-2">
           <div>
@@ -69,7 +73,7 @@ function CartProduct({ img, price, qty, item, name }) {
           </div>
         </div>
         <div className="col-lg-2">
-          <p className="pt-4">N{price * qty}</p>
+          <p className="pt-4">N{addCommas(price * qty)}</p>
         </div>
       </div>
       <hr />
