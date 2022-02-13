@@ -7,7 +7,7 @@ import Header from "../Components/Header";
 import MobileNav from "../Components/MobileNav";
 import Nav from "../Components/Nav";
 import { useCart } from "react-use-cart";
-import notify from ".././Context/userContext";
+import notify from ".././Context/notify";
 
 
 function ShippingInfo() {
@@ -58,7 +58,7 @@ function ShippingInfo() {
       redirect: "follow",
     };
 
-    fetch("http://127.0.0.1:8000/api/add_contact", requestOptions)
+    fetch("https://tola-ecommerce.herokuapp.com/api/add_contact", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         notify("Contact info has been saved", "success");
@@ -84,7 +84,7 @@ function ShippingInfo() {
       redirect: "follow",
     };
 
-    fetch("http://127.0.0.1:8000/api/update_contact", requestOptions2)
+    fetch("https://tola-ecommerce.herokuapp.com/api/update_contact", requestOptions2)
       .then((response) => response.json())
       .then((result) => {
         if (result === 1) {
@@ -100,7 +100,7 @@ function ShippingInfo() {
 
   // FETCHES CONTACT INFO FOR LOGGED IN USER UPON REACHING THIS PAGE
   const getContact = () => {
-    fetch(`http://127.0.0.1:8000/api/get_contact/${user.id}`)
+    fetch(`https://tola-ecommerce.herokuapp.com/api/get_contact/${user.id}`)
       .then((response) => response.json())
       .then((user_contact) => {
         if (user_contact.length > 0) {

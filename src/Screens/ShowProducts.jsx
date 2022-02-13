@@ -14,16 +14,14 @@ function ShowProducts() {
   const [currentItems, setCurrentItems] = useState([]);
   const [itemOffset, setItemOffset] = useState(0);
   const [pageType, setPageType] = useState(true);
-  const [productPerPage, setPerPage] = useState(3)
+  const [productPerPage, setPerPage] = useState(3);
 
-
-//GET ALL PRODUCTS FROM BACKEND
+  //GET ALL PRODUCTS FROM BACKEND
 
   const getProducts = () => {
-    fetch("http://localhost:8000/api/products")
+    fetch("https://tola-ecommerce.herokuapp.com/api/products")
       .then((response) => response.json())
       .then((products) => {
-        // console.log("show me products", products);
         setProducts(products);
         const endOffset = itemOffset + productPerPage;
         setCurrentItems(products.slice(itemOffset, endOffset));
@@ -36,37 +34,27 @@ function ShowProducts() {
 
   // GETTING PRODUCTS FROM BACKEND ENDS HERE
 
-
-
   // NUMBER OF PRODUCTS PER PAGE
 
   const perPage = (productNum) => {
     if (productNum > 0) {
-
-    setPerPage(productNum)
+      setPerPage(productNum);
     } else {
-        setPerPage(3);
+      setPerPage(3);
     }
   };
 
-    // NUMBER OF PRODUCTS PER PAGE
-
+  // NUMBER OF PRODUCTS PER PAGE
 
   //BRAND AND CAGEGORY FILTERING
 
   const brandAndCategoryFilter = (ev) => {
     if (ev.target.checked) {
-      // console.log(ev.target.name)
       const filtered = products.filter((product, i) => {
         const value = ev.target.value;
-        return (
-          (product.category === value) | (product.brand === value)
-          //  setProducts(product.category === ev.target.value)
-        );
+        return (product.category === value) | (product.brand === value);
       });
       setCurrentItems(filtered);
-
- 
     } else {
       getProducts();
     }
@@ -94,7 +82,6 @@ function ShowProducts() {
 
   //PRICE FILTERING ENDS
 
-
   //PAGINATION!!!
 
   const handlePageClick = (event) => {
@@ -105,11 +92,10 @@ function ShowProducts() {
     setItemOffset(newOffset);
   };
 
-  //PAGINATION ENDS 
+  //PAGINATION ENDS
 
   useEffect(() => {
     getProducts();
-
   }, [itemOffset, productPerPage]);
 
   return (
@@ -132,7 +118,6 @@ function ShowProducts() {
               priceFunc={priceFilter}
             />
             <Products products={currentItems} pageType={pageType} />
-
 
             <div className="col-lg-12 mb-5">
               <ReactPaginate

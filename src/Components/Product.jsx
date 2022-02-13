@@ -24,7 +24,7 @@ function Product({
         <div className="col-4 product-img-div">
             <Link to={`/product/${prod_id}`}>
               <img
-                src={`http://localhost:8000/${pic}`}
+                src={`https://tola-ecommerce.herokuapp.com/${pic}`}
                 alt=""
                 className="card-img-top"
               />

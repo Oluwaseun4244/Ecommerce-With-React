@@ -10,7 +10,7 @@ import { useCart } from "react-use-cart";
 import Button from "../Components/Button";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
-import notify  from '.././Context/userContext';
+import notify  from '.././Context/notify';
 // import { ToastContainer, toast, Slide, Zoom, Flip, Bounce } from "react-toastify";
 
 

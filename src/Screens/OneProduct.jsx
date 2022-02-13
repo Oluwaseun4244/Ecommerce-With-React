@@ -14,7 +14,7 @@ function OneProduct() {
   const [product, setProduct] = useState({});
   const {addItem } = useCart();
   const getProduct = (prod_id) => {
-    fetch(`http://127.0.0.1:8000/api/single_product/${prod_id}`)
+    fetch(`https://tola-ecommerce.herokuapp.com/api/single_product/${prod_id}`)
       .then((response) => response.json())
       .then((prod) => {
         console.log("product", prod);

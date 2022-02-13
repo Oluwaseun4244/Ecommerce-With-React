@@ -1,6 +1,6 @@
 import { FaTimes } from "react-icons/fa";
 import { useCart } from "react-use-cart";
-import notify from ".././Context/userContext";
+import notify from ".././Context/notify";
 import addCommas from ".././Context/addComma";
 // import { ToastContainer, toast, Slide, Zoom, Flip, Bounce} from "react-toastify";
 

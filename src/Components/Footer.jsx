@@ -4,7 +4,7 @@ import Button from "./Button";
 
 export default function Footer() {
 
-  let user = JSON.parse(localStorage.getItem("user"));
+  // let user = JSON.parse(localStorage.getItem("user"));
   return (
     <div>
       <div className="footer">

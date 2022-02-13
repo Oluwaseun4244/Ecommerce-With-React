@@ -1,7 +1,7 @@
 import React from "react";
 import GridProduct from "../Components/GridProduct";
 import Product from "../Components/Product";
-import notify  from '.././Context/userContext';
+import notify  from '.././Context/notify';
 import { useCart } from "react-use-cart";
 
 
@@ -28,18 +28,18 @@ import { useCart } from "react-use-cart";
 
 
 function Products({ products, pageType }) {
-  const { items, addItem, isEmpty } = useCart();
+
+  const { items, addItem } = useCart();
 
 
-  const checkAndNotify = (product, id) => {
+  const checkAndNotify = (product) => {
     //the (item) is a parameter waiting to be provided by function caller
-    //id was provided by the onClick
     const checkItem = (item) => {
-      return item.id === id;
+      return item.id === product.id;
     };
 
     const inCart = items.findIndex(checkItem);
-    //findIndex maps over items, call checkItem() and provides each item as argument for checkItem
+    //findIndex maps over the items in cart, call checkItem() and provides each item as argument for checkItem
     //if result condition isn't met, result is -1 and hence below
     if (inCart > -1) {
       notify("Product already in cart", "warn");
@@ -65,7 +65,7 @@ function Products({ products, pageType }) {
                 oldPrice={product.product_old_price}
                 description={product.product_description}
                 prod_id={product.id}
-                func={() => checkAndNotify(product, product.id)}
+                func={() => checkAndNotify(product)}
               />
             );
           })}
@@ -83,7 +83,7 @@ function Products({ products, pageType }) {
                   oldPrice={product.product_old_price}
                   description={product.product_description}
                   prod_id={product.id}
-                  func={() => checkAndNotify(product, product.id)}
+                  func={() => checkAndNotify(product)}
                 />
               );
             })}

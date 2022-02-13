@@ -24,7 +24,7 @@ function Homepage() {
   const [trending, setTrending] = useState([]);
 
   const getFeatured = () => {
-    fetch("http://localhost:8000/api/featured_products")
+    fetch("https://tola-ecommerce.herokuapp.com/api/featured_products")
       .then((response) => response.json())
       .then((featuredProd) => {
         console.log("these are featured", featuredProd);
@@ -35,7 +35,7 @@ function Homepage() {
       });
   };
   const getTrending = () => {
-    fetch("http://localhost:8000/api/trending_products")
+    fetch("https://tola-ecommerce.herokuapp.com/api/trending_products")
       .then((response) => response.json())
       .then((trending) => {
         console.log("these are featured", trending);

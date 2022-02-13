@@ -19,7 +19,7 @@ function Faq() {
       message: message,
     };
 
-    fetch("http://localhost:8000/api/add_question", {
+    fetch("https://tola-ecommerce.herokuapp.com/api/add_question", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
@@ -34,7 +34,7 @@ function Faq() {
   };
 
   const getFaqs = () => {
-    fetch("http://127.0.0.1:8000/api/faqs")
+    fetch("https://tola-ecommerce.herokuapp.com/api/faqs")
       .then((response) => response.json())
       .then((faqs) => {
         setFaq(faqs);

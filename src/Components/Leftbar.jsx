@@ -6,7 +6,7 @@ function Leftbar({ inputFunc, priceFunc }) {
   const [categories, setCategories] = useState([]);
 
   const getBrands = () => {
-    fetch("http://localhost:8000/api/brands")
+    fetch("https://tola-ecommerce.herokuapp.com/api/brands")
       .then((response) => response.json())
       .then((brands) => {
         setBrands(brands);
@@ -15,7 +15,7 @@ function Leftbar({ inputFunc, priceFunc }) {
   };
 
   const getCategories = () => {
-    fetch("http://localhost:8000/api/categories")
+    fetch("https://tola-ecommerce.herokuapp.com/api/categories")
       .then((response) => response.json())
       .then((categories) => {
         setCategories(categories);

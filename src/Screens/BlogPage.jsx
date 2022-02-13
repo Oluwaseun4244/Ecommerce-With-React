@@ -12,7 +12,7 @@ function BlogPage() {
   const [blogs, setBlogs] = useState([]);
 
   const getBlogs = () => {
-    fetch("http://localhost:8000/api/blogs")
+    fetch("https://tola-ecommerce.herokuapp.com/api/blogs")
       .then((response) => response.json())
       .then((blogs) => {
         // console.log("the blogs are here", blogs);

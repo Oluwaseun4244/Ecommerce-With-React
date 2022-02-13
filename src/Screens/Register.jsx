@@ -43,7 +43,7 @@ function Register() {
       redirect: "follow",
     };
 
-    fetch("http://127.0.0.1:8000/api/register", requestOptions)
+    fetch("https://tola-ecommerce.herokuapp.com/api/register", requestOptions)
       .then(response => response.json())
 
       .then((result) => {
