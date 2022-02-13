@@ -200,7 +200,7 @@ function Nav() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link anc2" to="/shop">
+                <Link className="nav-link anc2" to="#">
                   Shop
                 </Link>
               </li>
