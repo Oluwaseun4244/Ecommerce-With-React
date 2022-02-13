@@ -24,7 +24,7 @@ function GridProduct({
           <div className="grid-product">
             <Link  to={`/product/${prod_id}`}>
               <img
-                src={`http://localhost:8000/${pic}`}
+                src={`https://tola-ecommerce.herokuapp.com/${pic}`}
                 alt=""
                 className=""
               />

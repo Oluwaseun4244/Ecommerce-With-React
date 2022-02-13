@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import Button from "../Components/Button";
 import Footer from "../Components/Footer";
@@ -19,19 +19,23 @@ function Register() {
 
   const handleChange = (e) => {
     setDetails({ ...details, [e.target.id]: e.target.value });
-    // console.log("fafa", details)
+
   };
 
   // const { user, setUser } = useContext(userContext);
   // const { jwt, setJwt } = useContext(userContext);
 
-
   const handleSubmit = () => {
-    const data = {
-      ...details,
-    };
+    // const data = {
+    //   ...details,
+    // };
 
-    // console.log("details", data);
+
+    const data = {
+      "name": `${details.name}`,
+      "email": `${details.email}`,
+      "password": `${details.password}`,
+    };
 
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -40,20 +44,19 @@ function Register() {
       method: "POST",
       headers: myHeaders,
       body: JSON.stringify(data),
+      // body: JSON.stringify(data),
       redirect: "follow",
     };
 
+    console.log("data", data);
+    // fetch("http://127.0.0.1:8000/api/register", requestOptions)
     fetch("https://tola-ecommerce.herokuapp.com/api/register", requestOptions)
-      .then(response => response.json())
+      .then((response) => response.json())
 
       .then((result) => {
-        console.log("Mr Jide", result);
-
+        console.log("Result", result);
       })
       .catch((error) => {
-        alert(
-          "Something went wrong! Please check your internet connection...."
-        );
         console.log("error", error);
       });
   };
@@ -96,7 +99,7 @@ function Register() {
           onChange={handleChange}
         />
         <p className="login-txt mt-4 mb-4">Forgot your password?</p>
-        <Button btnText="Sign Up" btnClass="login-btn" btnFunc={handleSubmit}/>
+        <Button btnText="Sign Up" btnClass="login-btn" btnFunc={handleSubmit} />
         <p className="login-txt mt-4" style={{ textAlign: "center" }}>
           Already have an Account? <Link to="/login">Login</Link>
         </p>

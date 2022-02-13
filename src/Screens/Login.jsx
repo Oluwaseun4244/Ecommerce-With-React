@@ -39,8 +39,10 @@ function Login() {
       redirect: "follow",
     };
 
+    // console.log("req login", requestOptions)
     let intendedRoute = localStorage.getItem("route")
 
+    // fetch("http://127.0.0.1:8000/api/login", requestOptions)
     fetch("https://tola-ecommerce.herokuapp.com/api/login", requestOptions)
       .then((response) => response.json())
       .then((result) => {
