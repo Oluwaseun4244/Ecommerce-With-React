@@ -20,10 +20,7 @@ function Filter({grid, list, func}) {
               className="search-input"
               aria-label=".form-select-sm select example"
             >
-              {/* <option defaultValue>Best Match</option>
-              <option value={1}>One</option>
-              <option value={2}>Two</option>
-              <option value={3}>Three</option> */}
+
             </select>
           </div>
           <div className="search-div3">

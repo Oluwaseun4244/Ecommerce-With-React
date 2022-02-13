@@ -9,7 +9,6 @@ function CalculateShopping() {
         <input placeholder="Mirpur Dhaka - 1200" className="mt-4 checkout-input3" type="text"  />
         <input placeholder="Postal Code" className="mt-4 checkout-input3" type="text"  />
         <Button btnClass="calculate-btn mt-4" btnText="Calculate Shipping"/>
-        {/* <button className=""></button> */}
       </div>
     )
 }

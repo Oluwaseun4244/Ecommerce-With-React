@@ -26,7 +26,6 @@ function CartProduct({ img, price, qty, item, name }) {
     <div>
       <FaTimes
         className="remove-product-icon"
-        // style={{float:"right"}}
         onClick={() => removeAndNotify(item.id)}
       />
       <div className="row">
@@ -71,21 +70,7 @@ function CartProduct({ img, price, qty, item, name }) {
             </button>
           </span>
         </div>
-        {/* <div className="col-lg-2 pt-4 cart-prod-qty">
-            <i
-              style={{ cursor: "pointer" }}
-              className="fa fa-minus"
-              onClick={() => updateItemQuantity(item.id, item.quantity - 1)}
-            ></i>
 
-            <span className="">{qty}</span>
-
-            <i
-              style={{ cursor: "pointer" }}
-              className="fa fa-plus "
-              onClick={() => updateItemQuantity(item.id, item.quantity + 1)}
-            ></i>
-        </div> */}
         <div className="col-lg-2">
           <p className="pt-4">N{addCommas(price * qty)}</p>
         </div>

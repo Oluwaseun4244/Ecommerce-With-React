@@ -19,7 +19,7 @@ function SingleBlog() {
   const [dateOfBlog, setdateOfBlog] = useState("");
 
   const fetchSingleBlog = () => {
-    fetch(`http://localhost:8000/api/single_blog/${blog_id}`)
+    fetch(`https://tola-ecommerce.herokuapp.com/api/single_blog/${blog_id}`)
       .then((response) => response.json())
       .then((blogFromDb) => {
         // console.log("blog", blogFromDb);

@@ -56,7 +56,7 @@ const clearAndNotify = () => {
                 <h4 style={{ color: "#c91641" }} className="empty-cart text-center">
                   Your Cart is empty!{" "}
                   <span style={{ color: "black" }}>
-                    {/* <BsCartDash /> */}
+               
                   </span>
                 </h4>
                 <div className="empty-cart-div">

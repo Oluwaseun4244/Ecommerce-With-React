@@ -18,12 +18,7 @@ function SingleProduct({
     setSingleImage(theImage);
   };
 
-  // const setSingle = (parameter) => {
-  
-  //   let test = parameter;
-  //   setSingleImage(pic);
-  //   console.log("hahah");
-  // };
+
 
   useEffect(() => {
 
