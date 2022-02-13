@@ -7,10 +7,12 @@ import Header from "../Components/Header";
 import MobileNav from "../Components/MobileNav";
 import Nav from "../Components/Nav";
 import { userContext } from "../Context/userContext";
+import { useEffect } from "react";
 
 function Login() {
   const navigate = useNavigate();
   const [errorMsg, setErrorMsg] = useState("");
+  const [regMsg, setRegMsg] = useState("");
   const [details, setDetails] = useState({
     email: "",
     password: "",
@@ -24,6 +26,7 @@ function Login() {
   const { jwt, setJwt } = useContext(userContext);
 
   const handleLogin = () => {
+    
     const payload = {
       email: `${details.email}`,
       password: `${details.password}`,
@@ -39,7 +42,6 @@ function Login() {
       redirect: "follow",
     };
 
-    // console.log("req login", requestOptions)
     let intendedRoute = localStorage.getItem("route")
 
     // fetch("http://127.0.0.1:8000/api/login", requestOptions)
@@ -64,20 +66,18 @@ function Login() {
         } else if(result.email ){
           setErrorMsg(result.email[0])
         }
-        // if(result.jwt){
-        //     localStorage.setItem("user", JSON.stringify(result.user));
-        //     localStorage.setItem("jwt", JSON.stringify(result.jwt));
 
-        //     setUser(result.user)
-        //     setJwt(result.jwt)
-
-        //     navigate('/success');
-        // }else{
-        //     console.log('not right')
-        // }
       })
       .catch((error) => console.log("error", error));
   };
+
+  useEffect(() => {
+    let newreg = localStorage.getItem("newlyReg")
+    setRegMsg(newreg)
+
+    localStorage.removeItem("newlyReg")
+  }, [])
+  
 
   return (
     <div>
@@ -88,8 +88,8 @@ function Login() {
         <h4 style={{ textAlign: "center" }} id="login-txt">
           Login
         </h4>
-        <p style={{ textAlign: "center" }} className="login-txt mb-4">
-          Please login using account details below
+        <p style={{ textAlign: "center", color: "green" }} className="login-txt mb-4">
+          {regMsg} <br /> Please login using account details below
         </p>
         <p style={{textAlign: "center", color: "red"}}>{errorMsg}</p>
         <input

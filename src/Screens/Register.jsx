@@ -7,6 +7,7 @@ import Header from "../Components/Header";
 import MobileNav from "../Components/MobileNav";
 import Nav from "../Components/Nav";
 import { userContext } from "../Context/userContext";
+import { useEffect } from "react";
 
 function Register() {
   const navigate = useNavigate();
@@ -17,24 +18,26 @@ function Register() {
     password: "",
   });
 
+  const [emailError, setEmailError] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [passError, setPassError] = useState("");
+
+
   const handleChange = (e) => {
     setDetails({ ...details, [e.target.id]: e.target.value });
-
   };
 
   // const { user, setUser } = useContext(userContext);
   // const { jwt, setJwt } = useContext(userContext);
 
   const handleSubmit = () => {
-    // const data = {
-    //   ...details,
-    // };
-
-
+    setEmailError("");
+    setNameError("");
+    setPassError("");
     const data = {
-      "name": `${details.name}`,
-      "email": `${details.email}`,
-      "password": `${details.password}`,
+      name: `${details.name}`,
+      email: `${details.email}`,
+      password: `${details.password}`,
     };
 
     var myHeaders = new Headers();
@@ -48,13 +51,28 @@ function Register() {
       redirect: "follow",
     };
 
-    console.log("data", data);
     // fetch("http://127.0.0.1:8000/api/register", requestOptions)
     fetch("https://tola-ecommerce.herokuapp.com/api/register", requestOptions)
       .then((response) => response.json())
 
       .then((result) => {
         console.log("Result", result);
+        if (result.user) {
+          localStorage.setItem("newlyReg", "Successfully registered.")
+          navigate("/login")
+        } else {
+          let res = JSON.parse(result);
+          if (res.email) {
+            setEmailError(res.email);
+          }
+          if (res.name) {
+            setNameError(res.name);
+          }
+          if (res.password) {
+            setPassError(res.password);
+          }
+          console.log("Result", res);
+        }
       })
       .catch((error) => {
         console.log("error", error);
@@ -67,6 +85,25 @@ function Register() {
       <Header desc="My Account" />
       <MobileNav desc="My Account" />
       <div className="login">
+        <p
+          style={{ textAlign: "center", color: "red" }}
+          className="login-txt mb-4"
+        >
+          {emailError}
+        </p>
+        <p
+          style={{ textAlign: "center", color: "red" }}
+          className="login-txt mb-4"
+        >
+          {nameError}
+        </p>
+        <p
+          style={{ textAlign: "center", color: "red" }}
+          className="login-txt mb-4"
+        >
+          {passError}
+        </p>
+
         <h4 style={{ textAlign: "center" }} id="login-txt">
           Register
         </h4>
