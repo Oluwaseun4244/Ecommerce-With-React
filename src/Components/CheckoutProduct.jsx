@@ -6,7 +6,7 @@ function CheckoutProduct({price, name, image, qty }) {
         <div >
         <div className="row demo-img">
           <div className="col-lg-4 ">
-            <img style={{width: "83px", height: "87px"}} src={`http://localhost:8000/${image}`} alt="" />
+            <img style={{width: "83px", height: "87px"}} src={`https://tola-ecommerce.herokuapp.com/${image}`} alt="" />
           </div>
           <div className="col-lg-8">
             <h6>{name} <span style={{float: "right"}}>N{addCommas(price)}</span></h6>
