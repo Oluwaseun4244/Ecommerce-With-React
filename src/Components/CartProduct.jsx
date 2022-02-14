@@ -34,7 +34,7 @@ function CartProduct({ img, price, qty, item, name }) {
             <div className="col-lg-4 col-sm-4">
               <img
                 className="cart-img"
-                src={`http://localhost:8000/${img}`}
+                src={`https://tola-ecommerce.herokuapp.com/${img}`}
                 alt=""
               />
             </div>
