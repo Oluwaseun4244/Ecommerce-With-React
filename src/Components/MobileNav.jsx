@@ -1,11 +1,25 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "react-use-cart";
+import { useNavigate } from "react-router";
 
 function MobileNav({ desc }) {
-  const { isEmpty, totalUniqueItems } = useCart();
+  const { isEmpty, totalUniqueItems, emptyCart } = useCart();
   const [mobileView, setMobileView] = useState(false);
 
+  const navigate = useNavigate();
+  let user = JSON.parse(localStorage.getItem("user"));
+
+  const logout = () => {
+    localStorage.clear();
+    emptyCart();
+    navigate("/login");
+  };
+
+  const saveRoute = () =>{
+    localStorage.setItem("route", "/cart")
+    navigate("/login")
+  }
   const changeMobileView = () => {
     setMobileView(!mobileView);
   };
@@ -44,7 +58,7 @@ function MobileNav({ desc }) {
               <ul className="navbar-nav">
                 <li className="mobile-nav-item">
                   <Link
-                    className="nav-link dropdown-toggle  anc"
+                    className="nav-link   anc"
                     to="#"
                     id="navbarDropdown"
                     role="button"
@@ -53,7 +67,7 @@ function MobileNav({ desc }) {
                   >
                     English
                   </Link>
-                  <ul className="dropdown-menu">
+                  {/* <ul className="dropdown-menu">
                     <li>
                       <Link className="" to="#">
                         Action
@@ -72,11 +86,11 @@ function MobileNav({ desc }) {
                         Something else here
                       </Link>
                     </li>
-                  </ul>
+                  </ul> */}
                 </li>
                 <li className="mobile-nav-item ">
                   <Link
-                    className="nav-link anc dropdown-toggle"
+                    className="nav-link anc "
                     to="#"
                     id="navbarDropdown"
                     role="button"
@@ -85,7 +99,7 @@ function MobileNav({ desc }) {
                   >
                     USD
                   </Link>
-                  <ul className="dropdown-menu">
+                  {/* <ul className="dropdown-menu">
                     <li>
                       <Link className="" to="#">
                         Action
@@ -104,19 +118,20 @@ function MobileNav({ desc }) {
                         Something else here
                       </Link>
                     </li>
-                  </ul>
+                  </ul> */}
                 </li>
                 <li className="mobile-nav-item">
                   <Link className="nav-link anc" to="/login">
                     Login <i className="fa fa-user" />
                   </Link>
                 </li>
+                
                 <li className="mobile-nav-item">
                   <Link className="nav-link anc" to="#">
                     wishlist <i className="fa fa-heart" />
                   </Link>
                 </li>
-                <li className="mobile-nav-item">
+                {/* <li className="mobile-nav-item">
                   <Link className="nav-link anc" to="/cart">
                     {isEmpty ? (
                       <div>
@@ -129,7 +144,35 @@ function MobileNav({ desc }) {
                       </div>
                     )}
                   </Link>
-                </li>
+                </li> */}
+
+<li className="mobile-nav-item">
+                {isEmpty && user ? (
+                  <Link className="nav-link anc" to="/cart">
+                    <div>
+                      <i className="fa fa-shopping-cart" />
+                    </div>
+                  </Link>
+                ) : isEmpty && !user ? (
+                  <Link className="nav-link anc" to="/login">
+                    <div>
+                      <i className="fa fa-shopping-cart cart-num" />
+                    </div>
+                  </Link>
+                ) : !isEmpty && !user ? (
+                  // <Link  to="/login">
+                  <div style={{cursor: "pointer"}} onClick={saveRoute} className="nav-link anc">
+                    <i className="fa fa-shopping-cart cart-num" />
+                    {totalUniqueItems}
+                  </div>
+                  // </Link>
+                ) :  (   <Link className="nav-link anc" to="/cart">
+                <div>
+                  <i className="fa fa-shopping-cart " />
+                 <span className="cart-num" >{ totalUniqueItems}</span> 
+                </div>
+                </Link>)}
+              </li>
               </ul>
             </div>
           )}

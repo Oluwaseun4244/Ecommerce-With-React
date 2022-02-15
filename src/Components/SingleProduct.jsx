@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-
 function SingleProduct({
   productDescription,
   productName,
@@ -10,20 +9,15 @@ function SingleProduct({
   pic1,
   pic2,
   pic3,
-  func
+  func,
 }) {
   const [singleImage, setSingleImage] = useState();
- 
+
   const changeImage = (theImage) => {
     setSingleImage(theImage);
   };
 
-
-
-  useEffect(() => {
-
-   
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <div className="container">
@@ -39,35 +33,38 @@ function SingleProduct({
         <div className="col-lg-2 single-product-col2">
           <img
             onClick={() => changeImage(pic1)}
-            src={`http://localhost:8000/${pic1}`}
+            src={`https://tola-react-ecommerce.herokuapp.com/${pic1}`}
             alt="bag1"
           />
           <img
             onClick={() => changeImage(pic2)}
             className="single-img-middle"
-            src={`http://localhost:8000/${pic2}`}
+            src={`https://tola-react-ecommerce.herokuapp.com/${pic2}`}
             alt="bag2"
           />
-          
+
           <img
             onClick={() => changeImage(pic3)}
-            src={`http://localhost:8000/${pic3}`}
+            src={`https://tola-react-ecommerce.herokuapp.com/${pic3}`}
             alt="bag3"
           />
         </div>
         <div className="col-lg-4 single-product-col2">
-          {!singleImage ? (  <img
-            //  src={`http://localhost:8000/${pic}`}
-            src={`http://localhost:8000/${pic}`}
-            style={{ padding: "8px 4px", width: "375px", height: "487px" }}
-            alt="bag4"
-          />) : (  <img
-            //  src={`http://localhost:8000/${pic}`}
-            src={`http://localhost:8000/${singleImage}`}
-            style={{ padding: "8px 4px", width: "375px", height: "487px" }}
-            alt="bag4"
-          />)}
-     
+          {!singleImage ? (
+            <img
+              //  src={`http://localhost:8000/${pic}`}
+              src={`https://tola-react-ecommerce.herokuapp.com/${pic}`}
+              style={{ padding: "8px 4px", width: "375px", height: "487px" }}
+              alt="bag4"
+            />
+          ) : (
+            <img
+              //  src={`http://localhost:8000/${pic}`}
+              src={`https://tola-react-ecommerce.herokuapp.com/${singleImage}`}
+              style={{ padding: "8px 4px", width: "375px", height: "487px" }}
+              alt="bag4"
+            />
+          )}
         </div>
         <div className="col-lg-6">
           <div className="" style={{ padding: "8px 25px", marginBlock: "15%" }}>
@@ -128,7 +125,6 @@ function SingleProduct({
                   fontFamily: "Josefin Sans",
                   color: "blue",
                 }}
-
                 onClick={func}
               >
                 Add To Cart
