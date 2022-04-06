@@ -25,6 +25,7 @@ function CartTotals({ pageprop, grayed }) {
   };
 
   const saveOrder = () => {
+
     items.map((item) => {
       let payload = {
         user_id: `${user.id}`,
@@ -37,7 +38,7 @@ function CartTotals({ pageprop, grayed }) {
         trans_status: "pending",
       };
 
-      fetch("http://localhost:8000/api/add_transaction", {
+      fetch("https://tola-ecommerce.herokuapp.com/api/add_transaction", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -51,7 +52,7 @@ function CartTotals({ pageprop, grayed }) {
   };
 
   const handleSuccess = () => {
-    fetch(`http://localhost:8000/api/update_status/${reference}`)
+    fetch(`https://tola-ecommerce.herokuapp.com/api/update_status/${reference}`)
       .then((response) => response.json())
       .then((updated) => {})
       .catch((error) => {
@@ -118,7 +119,7 @@ function CartTotals({ pageprop, grayed }) {
           {({ initializePayment }) => (
             <Button
               btnFunc={() => {
-                fetch("http://localhost:8000/api/products")
+                fetch("https://tola-ecommerce.herokuapp.com/api/products")
                   .then((response) => response.json())
 
                   .then(function (data) {
