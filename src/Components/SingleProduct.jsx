@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from "react";
+import addCommas  from '.././Context/addComma';
 
 function SingleProduct({
-  productDescription,
-  productName,
-  productPrice,
-  oldPrice,
-  pic,
-  pic1,
-  pic2,
-  pic3,
+  product,
   func,
 }) {
-  const [singleImage, setSingleImage] = useState();
+  const [singleImage, setSingleImage] = useState("");
 
   const changeImage = (theImage) => {
     setSingleImage(theImage);
@@ -32,35 +26,35 @@ function SingleProduct({
       >
         <div className="col-lg-2 single-product-col2">
           <img
-            onClick={() => changeImage(pic1)}
-            src={`https://tola-react-ecommerce.herokuapp.com/${pic1}`}
-            alt="bag1"
+            onClick={() => changeImage(product.product_image1)}
+            src={`https://tola-ecommerce.herokuapp.com/${product.product_image1}`}
+            alt="product image"
           />
           <img
-            onClick={() => changeImage(pic2)}
+            onClick={() => changeImage(product.product_image2)}
             className="single-img-middle"
-            src={`https://tola-react-ecommerce.herokuapp.com/${pic2}`}
-            alt="bag2"
+            src={`https://tola-ecommerce.herokuapp.com/${product.product_image2}`}
+            alt="product image"
           />
 
           <img
-            onClick={() => changeImage(pic3)}
-            src={`https://tola-react-ecommerce.herokuapp.com/${pic3}`}
-            alt="bag3"
+            onClick={() => changeImage(product.product_image3)}
+            src={`https://tola-ecommerce.herokuapp.com/${product.product_image3}`}
+            alt="product image"
           />
         </div>
         <div className="col-lg-4 single-product-col2">
           {!singleImage ? (
             <img
               //  src={`http://localhost:8000/${pic}`}
-              src={`https://tola-react-ecommerce.herokuapp.com/${pic}`}
+              src={`https://tola-ecommerce.herokuapp.com/${product.product_image1}`}
               style={{ padding: "8px 4px", width: "375px", height: "487px" }}
-              alt="bag4"
+              alt="product image"
             />
           ) : (
             <img
               //  src={`http://localhost:8000/${pic}`}
-              src={`https://tola-react-ecommerce.herokuapp.com/${singleImage}`}
+              src={`https://tola-ecommerce.herokuapp.com/${singleImage}`}
               style={{ padding: "8px 4px", width: "375px", height: "487px" }}
               alt="bag4"
             />
@@ -74,7 +68,7 @@ function SingleProduct({
                   className="card-title"
                   style={{ fontFamily: "Josefin Sans", fontSize: "24px" }}
                 >
-                  {productName}
+                  {product.product_name}
                 </p>
               </div>
             </div>
@@ -101,8 +95,8 @@ function SingleProduct({
               <span style={{ color: "blue" }}>(22)</span>
             </div>
             <div>
-              <span className="card-price">${productPrice}.00</span>
-              <span className="card-price-former">${oldPrice}.00</span>
+              <span className="card-price">${(product.price)}.00</span>
+              <span className="card-price-former">${(product.product_old_price)}.00</span>
             </div>
             <div className="item-description">
               <p
@@ -114,7 +108,7 @@ function SingleProduct({
               >
                 Color
               </p>
-              <p>{productDescription}</p>
+              <p>{product.product_description}</p>
             </div>
             <div style={{ marginLeft: "30px" }}>
               <button
@@ -135,7 +129,7 @@ function SingleProduct({
             </div>
             <div>
               <p style={{ fontFamily: "Josefin Sans", color: "blue" }}>
-                Categories:
+                Categories: {product.category}
               </p>
               <p style={{ fontFamily: "Josefin Sans", color: "blue" }}>Tags:</p>
               <p style={{ fontFamily: "Josefin Sans", color: "blue" }}>

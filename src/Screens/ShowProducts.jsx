@@ -66,7 +66,7 @@ function ShowProducts() {
 
   const priceFilter = (ev) => {
     if (ev.target.checked) {
-      const priceFiltered = products.filter((product, i) => {
+      const priceFiltered = products.filter((product) => {
         const lowprice = ev.target.id;
         const highprice = ev.target.value;
         return (

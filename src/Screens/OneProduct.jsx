@@ -8,21 +8,40 @@ import Nav from "../Components/Nav";
 import RelatedProduct from "../Components/RelatedProduct";
 import SingleProduct from "../Components/SingleProduct";
 import { useCart } from "react-use-cart";
+import notify from ".././Context/notify";
 
 function OneProduct() {
   const { prod_id } = useParams();
   const [product, setProduct] = useState({});
-  const {addItem } = useCart();
+  const { items, addItem } = useCart();
+
+
   const getProduct = (prod_id) => {
     fetch(`https://tola-ecommerce.herokuapp.com/api/single_product/${prod_id}`)
       .then((response) => response.json())
       .then((prod) => {
-        console.log("product", prod);
         setProduct(prod);
       })
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const checkAndNotify = (product) => {
+    //the (item) is a parameter waiting to be provided by function caller
+    const checkItem = (item) => {
+      return item.id === product.id;
+    };
+
+    const inCart = items.findIndex(checkItem);
+    //findIndex maps over the items in cart, call checkItem() and provides each item as argument for checkItem
+    //if result condition isn't met, result is -1 and hence below
+    if (inCart > -1) {
+      notify("Product already in cart", "warn");
+    } else {
+      addItem(product);
+      notify("Product has been added to cart", "success");
+    }
   };
 
   useEffect(() => {
@@ -35,15 +54,8 @@ function OneProduct() {
       <Header desc="Product Details" />
       <MobileNav desc="Product Details" />
       <SingleProduct
-        productDescription={product.product_description}
-        productName={product.product_name}
-        productPrice={product.product_price}
-        oldPrice={product.product_old_price}
-        pic={product.product_image1}
-        pic1={product.product_image2}
-        pic2={product.product_image3}
-        pic3={product.product_image4}
-        func={()=>addItem(product)}
+        product={product}
+        func={() => checkAndNotify(product)}
       />
       <Description />
       <RelatedProduct />

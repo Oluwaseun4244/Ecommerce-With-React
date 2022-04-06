@@ -16,10 +16,10 @@ function MobileNav({ desc }) {
     navigate("/login");
   };
 
-  const saveRoute = () =>{
-    localStorage.setItem("route", "/cart")
-    navigate("/login")
-  }
+  const saveRoute = () => {
+    localStorage.setItem("route", "/cart");
+    navigate("/login");
+  };
   const changeMobileView = () => {
     setMobileView(!mobileView);
   };
@@ -125,7 +125,7 @@ function MobileNav({ desc }) {
                     Login <i className="fa fa-user" />
                   </Link>
                 </li>
-                
+
                 <li className="mobile-nav-item">
                   <Link className="nav-link anc" to="#">
                     wishlist <i className="fa fa-heart" />
@@ -146,33 +146,39 @@ function MobileNav({ desc }) {
                   </Link>
                 </li> */}
 
-<li className="mobile-nav-item">
-                {isEmpty && user ? (
-                  <Link className="nav-link anc" to="/cart">
-                    <div>
-                      <i className="fa fa-shopping-cart" />
-                    </div>
-                  </Link>
-                ) : isEmpty && !user ? (
-                  <Link className="nav-link anc" to="/login">
-                    <div>
+                <li className="mobile-nav-item">
+                  {isEmpty && user ? (
+                    <Link className="nav-link anc" to="/cart">
+                      <div>
+                        <i className="fa fa-shopping-cart" />
+                      </div>
+                    </Link>
+                  ) : isEmpty && !user ? (
+                    <Link className="nav-link anc" to="/login">
+                      <div>
+                        <i className="fa fa-shopping-cart cart-num" />
+                      </div>
+                    </Link>
+                  ) : !isEmpty && !user ? (
+                    // <Link  to="/login">
+                    <div
+                      style={{ cursor: "pointer" }}
+                      onClick={saveRoute}
+                      className="nav-link anc"
+                    >
                       <i className="fa fa-shopping-cart cart-num" />
+                      {totalUniqueItems}
                     </div>
-                  </Link>
-                ) : !isEmpty && !user ? (
-                  // <Link  to="/login">
-                  <div style={{cursor: "pointer"}} onClick={saveRoute} className="nav-link anc">
-                    <i className="fa fa-shopping-cart cart-num" />
-                    {totalUniqueItems}
-                  </div>
-                  // </Link>
-                ) :  (   <Link className="nav-link anc" to="/cart">
-                <div>
-                  <i className="fa fa-shopping-cart " />
-                 <span className="cart-num" >{ totalUniqueItems}</span> 
-                </div>
-                </Link>)}
-              </li>
+                  ) : (
+                    // </Link>
+                    <Link className="nav-link anc" to="/cart">
+                      <div>
+                        <i className="fa fa-shopping-cart " />
+                        <span className="cart-num">{totalUniqueItems}</span>
+                      </div>
+                    </Link>
+                  )}
+                </li>
               </ul>
             </div>
           )}

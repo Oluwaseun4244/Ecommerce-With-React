@@ -5,14 +5,11 @@ import addCommas  from '.././Context/addComma';
 
 
 function Product({
-  pic,
-  productName,
-  price,
-  oldPrice,
-  description,
-  prod_id,
-  func
+  func,
+  product
 }) 
+
+
 
 
 
@@ -22,9 +19,9 @@ function Product({
       <div className="card-body">
         <div className="single-item row">
         <div className="col-4 product-img-div">
-            <Link to={`/product/${prod_id}`}>
+            <Link to={`/product/${product.id}`}>
               <img
-                src={`https://tola-ecommerce.herokuapp.com/${pic}`}
+                src={`https://tola-ecommerce.herokuapp.com/${product.product_image1}`}
                 alt=""
                 className="card-img-top"
               />
@@ -33,7 +30,7 @@ function Product({
           <div className="col-8">
             <div className="row">
               <div className="col-lg-4">
-                <p className="card-title">{productName}</p>
+                <p className="card-title">{product.product_name}</p>
               </div>
               <div className="col-lg-8">
                 <div>
@@ -44,8 +41,8 @@ function Product({
               </div>
             </div>
             <div className="prices">
-              <span className="card-price">N{addCommas(price)}.00</span>
-              <span className="card-price-former">N{addCommas(oldPrice)}</span>
+              <span className="card-price">N{addCommas(product.price)}.00</span>
+              <span className="card-price-former">N{addCommas(product.product_old_price)}</span>
               <span>
                 <i className="fa fa-star" />
                 <i className="fa fa-star" />
@@ -55,7 +52,7 @@ function Product({
               </span>
             </div>
             <div className="item-description">
-              <p>{description}</p>
+              <p>{product.product_description}</p>
             </div>
             <div>
               <i

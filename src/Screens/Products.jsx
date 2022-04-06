@@ -59,12 +59,7 @@ function Products({ products, pageType }) {
             return (
               <Product
                 key={i}
-                pic={product.product_image1}
-                productName={product.product_name}
-                price={product.price}
-                oldPrice={product.product_old_price}
-                description={product.product_description}
-                prod_id={product.id}
+                product={product}
                 func={() => checkAndNotify(product)}
               />
             );
